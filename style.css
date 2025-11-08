@@ -36,9 +36,9 @@ button {
 #card {
   display: none;
   position: relative;
-  width: 600px; /* adjust to match your image */
-  height: 900px; /* adjust to match your image */
-  background-image: url("invitation.jpg");
+  width: 600px;   /* adjust to match your image */
+  height: 900px;  /* adjust to match your image */
+  background-image: url("invitation.jpeg"); /* replace with your image */
   background-size: cover;
   background-position: center;
   border-radius: 10px;
@@ -48,14 +48,13 @@ button {
 
 #guestName {
   position: absolute;
-  bottom: 120px; /* adjust position on the image */
+  top: 50px; /* name at the top */
   width: 100%;
   text-align: center;
-  color: #000; /* change to white if background is dark */
-  font-size: 28px;
+  color: gold; /* gold text */
+  font-size: 40px;
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 10px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* optional for contrast */
 }
 
 #downloadBtn {
