@@ -11,7 +11,7 @@ form.addEventListener("submit", async (e) => {
 
   const data = Object.fromEntries(new FormData(form));
   const img = new Image();
-  img.src = "invitation.png";
+  img.src = "invitation.jpeg";
 
   img.onload = () => {
     // Draw invitation template
@@ -30,7 +30,7 @@ form.addEventListener("submit", async (e) => {
     // Create downloadable card
     const url = canvas.toDataURL("image/png");
     link.href = url;
-    link.download = `Invitation-${data.firstName}.png`;
+    link.download = `Invitation-${data.firstName}.jpeg`;
     link.textContent = "Download Your Invitation";
 
     // Send confirmation email (optional)
