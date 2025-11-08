@@ -18,10 +18,10 @@ form.addEventListener("submit", (e) => {
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
     // Embed guest name
-    ctx.font = "30px Arial";
-    ctx.fillStyle = "black";
+    ctx.font = "bold 30px Arial";
+    ctx.fillStyle = "gold";
     ctx.textAlign = "center";
-    ctx.fillText(`${data.title} ${data.firstName} ${data.lastName}`, canvas.width / 2, 520);
+    ctx.fillText(`${data.title} ${data.firstName} ${data.lastName}`, canvas.width / 2, 80);
 
     // Show preview
     canvas.style.display = "block";
