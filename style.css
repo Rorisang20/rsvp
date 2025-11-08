@@ -13,3 +13,9 @@ button {
   padding: 10px 20px;
   cursor: pointer;
 }
+#cardCanvas {
+  margin-top: 20px;
+  border: 2px solid #ccc;
+  display: none;
+  max-width: 100%;
+}
