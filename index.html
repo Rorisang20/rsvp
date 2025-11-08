@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>RSVP Invitation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>RSVP for the Event</h1>
+
+  <form id="rsvpForm">
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="firstName" placeholder="First Name" required>
+    <input type="text" name="lastName" placeholder="Last Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="contact" placeholder="Contact Number" required>
+    <button type="submit">Submit RSVP</button>
+  </form>
+
+  <canvas id="cardCanvas" width="800" height="600" style="display:none;"></canvas>
+  <a id="downloadLink" style="display:none;">Download Invitation</a>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
