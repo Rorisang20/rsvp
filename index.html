@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>RSVP Invitation</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>RSVP for the Event</h1>
 
   <form id="rsvpForm">
-    <input type="text" name="title" placeholder="Title" required>
-    <input type="text" name="firstName" placeholder="First Name" required>
-    <input type="text" name="lastName" placeholder="Last Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="text" name="contact" placeholder="Contact Number" required>
-    <button type="submit">Submit RSVP</button>
+    <h2>Confirm Your Attendance</h2>
+    <input type="text" id="name" placeholder="Enter your name" required>
+    <input type="email" id="guestEmail" placeholder="Enter your email" required>
+    <button type="submit">Generate Invitation</button>
   </form>
 
   <div id="card">
-    <div id="guestname"></div>
+    <div id="guestName"></div>
   </div>
 
+  <button id="downloadBtn">Download Invitation</button>
+
+  <!-- html2canvas library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- EmailJS library -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
