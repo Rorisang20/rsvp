@@ -1,47 +1,52 @@
-// Initialize EmailJS (create a free account at https://www.emailjs.com)
-emailjs.init("FKrbfTPBBUEExgQh9");
+// Initialize EmailJS
+emailjs.init("FKrbfTPBBUEExgQh9"); // Replace with your EmailJS User ID
 
 const form = document.getElementById("rsvpForm");
 const canvas = document.getElementById("cardCanvas");
-const link = document.getElementById("downloadLink");
 const ctx = canvas.getContext("2d");
+const link = document.getElementById("downloadLink");
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const data = Object.fromEntries(new FormData(form));
+
   const img = new Image();
-  img.src = "invitation.jpeg";
+  img.src = "invitation.jpeg"; // Change to your image name (jpeg or png)
 
   img.onload = () => {
-    // Draw invitation template
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-    // Add guest name
+    // Embed guest name
     ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
     ctx.fillText(`${data.title} ${data.firstName} ${data.lastName}`, canvas.width / 2, 520);
 
-    // Show the preview
+    // Show preview
     canvas.style.display = "block";
-    link.style.display = "block";
 
-    // Create downloadable card
-    const url = canvas.toDataURL("image/png");
+    // Create downloadable link
+    const url = canvas.toDataURL("image/jpeg");
     link.href = url;
     link.download = `Invitation-${data.firstName}.jpeg`;
-    link.textContent = "Download Your Invitation";
+    link.style.display = "block";
 
-    // Send confirmation email (optional)
-    emailjs.send("service_tl35985", "template_fsauzla", {
+    // Send email to guest
+    emailjs.send("service_tl35985", "template_nxltgkv", {
       name: `${data.title} ${data.firstName} ${data.lastName}`,
       email: data.email,
       contact: data.contact,
+      invitation_url: url
     }).then(() => {
-      alert("RSVP received! Confirmation email sent.");
-    }).catch(() => {
-      alert("RSVP saved, but email failed to send.");
+      alert("RSVP submitted! Guest email sent.");
+    }).catch((err) => {
+      console.error(err);
+      alert("RSVP saved but email failed to send.");
     });
+  };
+
+  img.onerror = () => {
+    alert("Cannot load invitation image. Check file name.");
   };
 });
