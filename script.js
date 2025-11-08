@@ -38,8 +38,8 @@ form.addEventListener('submit', (e) => {
 downloadBtn.addEventListener('click', () => {
   html2canvas(card).then(canvas => {
     const link = document.createElement('a');
-    link.download = 'invitation_' + Date.now() + '.png';
-    link.href = canvas.toDataURL('image/png');
+    link.download = 'invitation_' + Date.now() + '.jpeg';
+    link.href = canvas.toDataURL('image/jpeg');
     link.click();
   });
 });
