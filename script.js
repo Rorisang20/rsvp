@@ -25,7 +25,7 @@ form.addEventListener('submit', (e) => {
     const imageData = canvas.toDataURL('image/jpeg');
 
     // 1️⃣ Send email to guest
-    emailjs.send("service_tl35985", "template_guest_invite", {
+    emailjs.send("service_tl35985", "template_ycw6zbp", {
       name: name,
       email: guestEmail,
       invitation_url: imageData
@@ -36,7 +36,7 @@ form.addEventListener('submit', (e) => {
     });
 
     // 2️⃣ Send confirmation to yourself
-    emailjs.send("service_tl35985", "template_admin_confirmation", {
+    emailjs.send("service_tl35985", "template_1m704a7", {
       name: name,
       email: guestEmail,
       invitation_url: imageData
