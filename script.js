@@ -1,5 +1,5 @@
 // Initialize EmailJS
-emailjs.init("FKrbfTPBBUEExgQh9"); // Your EmailJS Public Key
+emailjs.init("FKrbfTPBBUEExgQh9"); // Replace with your EmailJS User ID
 
 const form = document.getElementById('rsvpForm');
 const card = document.getElementById('card');
@@ -10,11 +10,9 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const name = document.getElementById('name').value.trim();
-  const guestEmail = document.getElementById('guestEmail').value.trim();
+  const email = document.getElementById('guestEmail').value.trim();
 
-  if (!name || !guestEmail) {
-    return alert("Please enter both your name and email.");
-  }
+  if (!name || !email) return alert("Please enter both name and email.");
 
   // Show name on card
   guestName.textContent = `Dear ${name}`;
@@ -22,8 +20,8 @@ form.addEventListener('submit', (e) => {
   form.style.display = 'none';
   downloadBtn.style.display = 'inline-block';
 
-  // Convert card to image
-  html2canvas(card, { scale: 2 }).then(canvas => {
+  // Convert card to image and send email
+  html2canvas(card).then(canvas => {
     const imageData = canvas.toDataURL('image/jpeg');
 
     // 1️⃣ Send email to guest
@@ -32,7 +30,7 @@ form.addEventListener('submit', (e) => {
       email: guestEmail,
       invitation_url: imageData
     }).then(() => {
-      console.log("Invitation sent to guest!");
+      console.log("Invitation sent to your email");
     }).catch(err => {
       console.error("Failed to send guest email:", err);
     });
@@ -53,9 +51,9 @@ form.addEventListener('submit', (e) => {
 
 // Download button functionality
 downloadBtn.addEventListener('click', () => {
-  html2canvas(card, { scale: 2 }).then(canvas => {
+  html2canvas(card).then(canvas => {
     const link = document.createElement('a');
-    link.download = 'invitation_' + Date.now() + '.jpg';
+    link.download = 'invitation_' + Date.now() + '.jpeg';
     link.href = canvas.toDataURL('image/jpeg');
     link.click();
   });
