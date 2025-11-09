@@ -25,7 +25,7 @@ form.addEventListener('submit', (e) => {
     const imageData = canvas.toDataURL('image/jpeg');
 
     // EmailJS sending
-    emailjs.send("service_tl35985", "template_nxltgkv", {
+    emailjs.send("service_tl35985", "template_fsauzla", {
       name: name,
       email: email,
       invitation_url: imageData
