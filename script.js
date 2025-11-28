@@ -1,60 +1,52 @@
 // Initialize EmailJS
 emailjs.init("FKrbfTPBBUEExgQh9"); // Replace with your EmailJS User ID
 
-const form = document.getElementById('rsvpForm');
-const card = document.getElementById('card');
-const guestName = document.getElementById('guestName');
-const downloadBtn = document.getElementById('downloadBtn');
+const form = document.getElementById("rsvpForm");
+const canvas = document.getElementById("cardCanvas");
+const ctx = canvas.getContext("2d");
+const link = document.getElementById("downloadLink");
 
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
 
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('guestEmail').value.trim();
+  const img = new Image();
+  img.src = "invitation.jpeg"; // Change to your image name (jpeg or png)
 
-  if (!name || !email) return alert("Please enter both name and email.");
+  img.onload = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  // Show name on card
-  guestName.textContent = `Dear ${name}`;
-  card.style.display = 'block';
-  form.style.display = 'none';
-  downloadBtn.style.display = 'inline-block';
+    // Embed guest name
+    ctx.font = "bold 30px Arial";
+    ctx.fillStyle = "gold";
+    ctx.textAlign = "center";
+    ctx.fillText(`${data.title} ${data.firstName} ${data.lastName}`, canvas.width / 2, 80);
 
-  // Convert card to image and send email
-  html2canvas(card).then(canvas => {
-    const imageData = canvas.toDataURL('image/jpeg');
+    // Show preview
+    canvas.style.display = "block";
 
-    // 1️⃣ Send email to guest
-    emailjs.send("service_tl35985", "template_ycw6zbp", {
-      name: name,
-      email: guestEmail,
-      invitation_url: imageData
+    // Create downloadable link
+    const url = canvas.toDataURL("image/jpeg");
+    link.href = url;
+    link.download = `Invitation-${data.firstName}.jpeg`;
+    link.style.display = "block";
+
+    // Send email to guest
+    emailjs.send("service_tl35985", "template_nxltgkv", {
+      name: `${data.title} ${data.firstName} ${data.lastName}`,
+      email: data.email,
+      contact: data.contact,
+      invitation_url: url
     }).then(() => {
-      console.log("Invitation sent to your email");
-    }).catch(err => {
-      console.error("Failed to send guest email:", err);
+      alert("RSVP submitted! Guest email sent.");
+    }).catch((err) => {
+      console.error(err);
+      alert("RSVP saved but email failed to send.");
     });
+  };
 
-    // 2️⃣ Send confirmation to yourself
-    emailjs.send("service_tl35985", "template_1m704a7", {
-      name: name,
-      email: guestEmail,
-      invitation_url: imageData
-    }).then(() => {
-      alert("✅ RSVP submitted! Guest and confirmation emails sent.");
-    }).catch(err => {
-      console.error("Failed to send confirmation email:", err);
-      alert("⚠️ Guest email sent but confirmation email failed.");
-    });
-  });
-});
-
-// Download button functionality
-downloadBtn.addEventListener('click', () => {
-  html2canvas(card).then(canvas => {
-    const link = document.createElement('a');
-    link.download = 'invitation_' + Date.now() + '.jpeg';
-    link.href = canvas.toDataURL('image/jpeg');
-    link.click();
-  });
+  img.onerror = () => {
+    alert("Cannot load invitation image. Check file name.");
+  };
 });
