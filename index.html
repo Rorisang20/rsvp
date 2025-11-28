@@ -1,32 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>RSVP Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <h1>RSVP for the Event</h1>
 
   <form id="rsvpForm">
-    <h2>Confirm Your Attendance</h2>
-    <input type="text" id="name" placeholder="Enter your name" required>
-    <input type="email" id="guestEmail" placeholder="Enter your email" required>
-    <button type="submit">Generate Invitation</button>
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="firstName" placeholder="First Name" required>
+    <input type="text" name="lastName" placeholder="Last Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="contact" placeholder="Contact Number" required>
+    <button type="submit">Submit RSVP</button>
   </form>
 
   <div id="card">
-    <div id="guestName"></div>
-  </div>
+    <div id="guestname"></div>
+    
+  <canvas id="cardCanvas" width="800" height="600" style="display:none;"></canvas>
+  <a id="downloadLink" style="display:none;">Download Invitation</a>
 
-  <button id="downloadBtn">Download Invitation</button>
-
-  <!-- html2canvas library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <!-- EmailJS library -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs-com/browser4@/dist/email.min.js"></script>
-  <input type="submit" id="button" value="send email" >
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="script.js"></script>
-
 </body>
 </html>
